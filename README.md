@@ -79,3 +79,7 @@ or just skim through the library source code to find it.
 
 If you want complete control over the bulb, or want to mix and match various settings, you can try using the `setPilot` or `sendRaw` functions.
 However, you should mostly find the functions in the example above to be enough.
+
+---
+### What's Wikari?
+It's supposed to be WiZ + Hikari (光, "light" in Japanese)
