@@ -4,11 +4,18 @@ A Node JS library to control **Philips WiZ smart bulbs**, written in TypeScript.
 
 Wikari is very strongly typed!
 
+# Installation
+```bash
+$ npm i wikari
+```
+
 # API
 
 The library is fairly simple to use, since you're mostly going to deal with `Bulb` objects:
 
 ```typescript
+import { discover, SCENES } from "wikari";
+
 const bulbs = await discover({});
 
 const bulb = bulbs[0];
