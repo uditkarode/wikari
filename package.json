@@ -1,15 +1,20 @@
 {
-	"name": "wikari",
+	"name": "wikari-rn",
 	"version": "0.1.0",
 	"author": "Udit Karode <udit.karode@gmail.com>",
 	"license": "GPL-3.0-only",
-	"description": "a library that lets you interact with Philips WiZ smart lights",
+	"description": "a library that lets you interact with Philips WiZ smart lights (react-native version)",
 	"keywords": [
 		"philips",
 		"wiz",
 		"smart bulb",
 		"bulb",
-		"iot"
+		"iot",
+    "react-native",
+    "android",
+    "ios",
+    "mobile",
+    "phone"
 	],
 	"files": [
 		"lib"
