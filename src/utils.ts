@@ -1,5 +1,5 @@
 import { HEX_COLOR_REGEX, POSSIBLE_MAC_CHARACTERS } from "./constants";
-import os from "os";
+import { NetworkInfo } from "react-native-network-info";
 
 export const sleep = (ms: number) =>
 	new Promise<void>(resolve => setTimeout(resolve, ms));
@@ -25,23 +25,10 @@ export const hexToRgb = (hex: `#${string}`) => {
 		: new Error("Invalid hex");
 };
 
-export const ipAddress = (networkInterface?: string) => {
-	const nets = os.networkInterfaces();
-
-	for (const name of Object.keys(nets)) {
-		for (const net of nets[name] ?? []) {
-			// Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
-			// on node <= v17, 'net.family' is "IPv4"
-			// since node v18, it's the number 4 or 6
-			const ipv4 = typeof net.family === "string" ? "IPv4" : 4;
-			if (net.family === ipv4 && !net.internal) {
-				if (networkInterface) {
-					if (name == networkInterface) return net.address;
-				} else return net.address;
-			}
-		}
-	}
-
+export const ipAddress = async () => {
+	try {
+		return await NetworkInfo.getIPV4Address();
+	} catch {}
 	return undefined;
 };
 

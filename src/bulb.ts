@@ -129,19 +129,11 @@ export class Bulb {
 	 * about it's state every 5 seconds. You can intercept these updates with the
 	 * {@link this.onSync} function.
 	 *
-	 * @param networkInterface network interface connected to the network the bulb is on
 	 * @returns subscription message response on success, else a {@link WikariError}
 	 */
-	async subscribe(networkInterface?: string) {
-		const listenIp = ipAddress(networkInterface);
-		if (!listenIp)
-			throw new Error(
-				`Unable to obtain the local IP address ${
-					networkInterface
-						? ` for the network interface '${networkInterface}'`
-						: ""
-				}`,
-			);
+	async subscribe() {
+		const listenIp = await ipAddress();
+		if (!listenIp) throw new Error(`Unable to obtain the local IP address`);
 
 		// Sends a subscription message to the bulb
 		// It will now notify us about status changes
