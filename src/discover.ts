@@ -1,4 +1,5 @@
-import dgram from "dgram";
+import { RemoteInfo } from "dgram";
+import dgram from "react-native-udp";
 import { Bulb } from "./bulb";
 import { DEFAULT_DISCOVER_WAIT_MS, WIZ_BULB_LISTEN_PORT } from "./constants";
 import { checkType } from "./type-checker";
@@ -25,7 +26,7 @@ export async function discover({
 	port = WIZ_BULB_LISTEN_PORT,
 	waitMs = DEFAULT_DISCOVER_WAIT_MS,
 }): Promise<Bulb[]> {
-	const client = dgram.createSocket("udp4");
+	const client = dgram.createSocket({ type: "udp4" });
 	const bulbs: Bulb[] = [];
 	const message: GetPilotMsg = {
 		method: "getPilot",
@@ -38,9 +39,9 @@ export async function discover({
 		});
 	}
 
-	client.send(JSON.stringify(message), port, addr);
+	client.send(JSON.stringify(message), undefined, undefined, port, addr);
 
-	const listener = (msg: Buffer, rinfo: dgram.RemoteInfo) => {
+	const listener = (msg: Buffer, rinfo: RemoteInfo) => {
 		const response = JSON.parse(msg.toString());
 
 		if (checkType(getPilotResponseTemplate, response)) {
