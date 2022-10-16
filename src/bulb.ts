@@ -1,5 +1,5 @@
 import dgram from "react-native-udp";
-import { EventEmitter } from "react-native";
+import { NativeEventEmitter as EventEmitter } from "react-native";
 import {
 	DEFAULT_RESPONSE_WAIT_MS,
 	SCENES,
@@ -587,7 +587,7 @@ export class Bulb {
 	closeConnection() {
 		if (Bulb.state == WikariState.CLOSED) return;
 		Bulb.setInstanceState(WikariState.CLOSED);
-		Bulb.stateEmitter.removeAllListeners();
+		Bulb.stateEmitter.removeAllListeners("state-change");
 		Bulb.client.removeAllListeners();
 		Bulb.client.close();
 	}
