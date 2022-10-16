@@ -1,5 +1,5 @@
-import dgram from "dgram";
-import EventEmitter from "events";
+import dgram from "react-native-udp";
+import { EventEmitter } from "react-native";
 import {
 	DEFAULT_RESPONSE_WAIT_MS,
 	SCENES,
@@ -21,6 +21,7 @@ import {
 } from "./types";
 import { getRandomMac, hexToRgb, ipAddress } from "./utils";
 import { WikariError, WikariErrorCode } from "./wikari-error";
+import { RemoteInfo } from "dgram";
 
 export const enum WikariState {
 	IDLE,
@@ -51,7 +52,7 @@ export const enum WikariState {
  */
 export class Bulb {
 	static readonly stateEmitter = new EventEmitter();
-	static client = dgram.createSocket("udp4");
+	static client = dgram.createSocket({ type: "udp4" });
 
 	private static _state = WikariState.IDLE;
 	static get state() {
@@ -394,7 +395,7 @@ export class Bulb {
 		return new Promise((resolve, reject) => {
 			let timer: ReturnType<typeof setTimeout>;
 
-			const messageListener = (msg: Buffer, rinfo: dgram.RemoteInfo) => {
+			const messageListener = (msg: Buffer, rinfo: RemoteInfo) => {
 				// if the message is not from the bulb IP, ignore it
 				if (rinfo.address != this.address) return;
 
@@ -434,6 +435,8 @@ export class Bulb {
 
 			Bulb.client.send(
 				JSON.stringify(message),
+				undefined,
+				undefined,
 				this.bulbPort,
 				this.address,
 				error => {
@@ -477,6 +480,8 @@ export class Bulb {
 		return new Promise((resolve, reject) => {
 			Bulb.client.send(
 				JSON.stringify(message),
+				undefined,
+				undefined,
 				this.bulbPort,
 				this.address,
 				error => {

@@ -18,7 +18,11 @@
 	"types": "./lib/mod.d.ts",
 	"repository": "https://github.com/uditkarode/wikari",
 	"devDependencies": {
-		"@types/node": "^18.8.3",
-		"typescript": "^4.8.4"
+		"typescript": "^4.8.4",
+		"@types/node": "^18.11.0",
+		"@types/react-native": "^0.70.5"
+	},
+	"dependencies": {
+		"react-native-udp": "^4.1.5"
 	}
 }
