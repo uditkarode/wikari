@@ -2,7 +2,7 @@
 	"name": "wikari",
 	"version": "0.1.0",
 	"author": "Udit Karode <udit.karode@gmail.com>",
-	"license": "GPL-3.0-only",
+	"license": "GPL-3.1.1-only",
 	"description": "a library that lets you interact with Philips WiZ smart lights",
 	"keywords": [
 		"philips",
