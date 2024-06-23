@@ -52,10 +52,10 @@ export const getPilotResponseTemplate = makeTypeTemplate({
 	result: {
 		mac: ["string", true],
 		rssi: ["number", true],
-		src: ["string", true],
 		state: ["boolean", true],
 		sceneId: ["number", true],
 		// optional properties
+		src: ["string", false],
 		temp: ["number", false],
 		speed: ["number", false],
 		r: ["number", false],
@@ -90,7 +90,7 @@ export const syncPilotResponseTemplate = makeTypeTemplate({
 	params: {
 		mac: ["string", true],
 		rssi: ["number", true],
-		src: ["string", true],
+		src: ["string", false],
 		mqttCd: ["number", false],
 		ts: ["number", false],
 		...pilotTemplate,
