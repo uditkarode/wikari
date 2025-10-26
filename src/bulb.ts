@@ -458,6 +458,7 @@ export class Bulb {
 
 			timer = setTimeout(() => {
 				Bulb.client.off("message", messageListener);
+				Bulb.setInstanceState(WikariState.READY);
 				reject(
 					new WikariError(
 						WikariErrorCode.RequestTimedOut,
